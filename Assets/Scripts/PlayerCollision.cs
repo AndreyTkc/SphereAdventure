@@ -40,13 +40,13 @@ public class PlayerCollision : MonoBehaviour
     private IEnumerator Respawn()
     {
         _meshRenderer.enabled = false;
+        IsEnabled = false;
         yield return new WaitForSeconds(2);
         _rb.velocity = Vector3.zero;
         _rb.angularVelocity = Vector3.zero;
         _rb.mass = 1;
         _rb.drag = 0;
         _rb.angularDrag = 0;
-        IsEnabled = false;
         transform.position = new Vector3(-7.75f, 14, -7.80000019f);
         _meshRenderer.enabled = true;
     }
