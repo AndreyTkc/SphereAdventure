@@ -4,19 +4,15 @@ using UnityEngine;
 public class PlayerCollision : MonoBehaviour
 {
     [SerializeField] private GameObject explosionPrefab;
+    [SerializeField] private new Animator animation;
     private Rigidbody _rb;
     private MeshRenderer _meshRenderer;
-    private GameObject _go;
-    private readonly Vector3 _spawnPoint = new Vector3(-7.75f, 14, -7.80000019f);
     public static bool IsEnabled = false;
     public static bool IsEnabledCameraMove = false;
 
     private void Awake()
     {
         _meshRenderer = GetComponent<MeshRenderer>();
-        _rb = GetComponent<Rigidbody>();
-        GameObject faded = GameObject.Find("Faded");
-        _go = faded;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -53,16 +49,6 @@ public class PlayerCollision : MonoBehaviour
         IsEnabledCameraMove = false;
         _rb.constraints = RigidbodyConstraints.FreezeAll;
         yield return new WaitForSeconds(2);
-        _go.SetActive(true);
-        _rb.velocity = Vector3.zero;
-        _rb.angularVelocity = Vector3.zero;
-        _rb.mass = 1;
-        _rb.drag = 0;
-        _rb.angularDrag = 0;
-        transform.position = _spawnPoint;
-        _meshRenderer.enabled = true;
-        _rb.constraints = RigidbodyConstraints.None;
-        _go.SetActive(false);
+        animation.Play("FadeEffect");
     }
-    
 }
