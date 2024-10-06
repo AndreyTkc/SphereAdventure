@@ -4,15 +4,17 @@ using UnityEngine;
 public class PlayerCollision : MonoBehaviour
 {
     [SerializeField] private GameObject explosionPrefab;
-    [SerializeField] private new Animator animation;
+    [SerializeField] private Animator animator;
     private Rigidbody _rb;
     private MeshRenderer _meshRenderer;
+    [SerializeField] private PlayerHealth playerHealth;
     public static bool IsEnabled = false;
     public static bool IsEnabledCameraMove = false;
 
     private void Awake()
     {
         _meshRenderer = GetComponent<MeshRenderer>();
+        _rb = GetComponent<Rigidbody>();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -36,7 +38,7 @@ public class PlayerCollision : MonoBehaviour
                 rb.AddForce(force);
             }
 
-            PlayerHealth.HealthUpdate();
+            playerHealth.HealthUpdate();
             
             StartCoroutine(Respawn());
         }
@@ -49,6 +51,7 @@ public class PlayerCollision : MonoBehaviour
         IsEnabledCameraMove = false;
         _rb.constraints = RigidbodyConstraints.FreezeAll;
         yield return new WaitForSeconds(2);
-        animation.Play("FadeEffect");
+        animator.SetTrigger("Play");
+        IsEnabledCameraMove = true;
     }
 }

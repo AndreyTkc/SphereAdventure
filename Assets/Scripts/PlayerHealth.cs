@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    private static int _health = 5;
+    private int _health = 5;
 
-    public static void HealthUpdate()
+    [SerializeField] private UpdateLives updateLives;
+
+    public void HealthUpdate()
     {
         _health--;
         
         Debug.Log(_health);
+        
+        updateLives.UpdatePlayerLives(_health);
         
         if (_health <= 0)
         {
