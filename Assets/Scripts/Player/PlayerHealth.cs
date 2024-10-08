@@ -7,6 +7,7 @@ public class PlayerHealth : MonoBehaviour
     private int _health = 5;
 
     [SerializeField] private UpdateLives updateLives;
+    [SerializeField] private Animator animator;
 
     public void HealthUpdate()
     {
@@ -19,6 +20,8 @@ public class PlayerHealth : MonoBehaviour
         if (_health <= 0)
         {
             Debug.Log("Game Over!");
+            animator.SetTrigger("GameOverTrigger");
+            RespawnPlayer.IsAlive = false;
         }
     }
 }

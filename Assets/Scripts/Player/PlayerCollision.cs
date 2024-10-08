@@ -51,7 +51,10 @@ public class PlayerCollision : MonoBehaviour
         IsEnabledCameraMove = false;
         _rb.constraints = RigidbodyConstraints.FreezeAll;
         yield return new WaitForSeconds(2);
-        animator.SetTrigger("Play");
+        if (RespawnPlayer.IsAlive)
+        {
+            animator.SetTrigger("Play");
+        }
         IsEnabledCameraMove = true;
     }
 }

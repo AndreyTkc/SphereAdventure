@@ -8,10 +8,13 @@ public class RespawnPlayer : MonoBehaviour
     [SerializeField] private Rigidbody rb;
     [SerializeField] private MeshRenderer mr;
     private readonly Vector3 _spawnPoint = new Vector3(-7.75f, 14, -7.80000019f);
+    public static bool IsAlive = true;
     
     
     public void Respawn()
     {
+        if (!IsAlive) return;
+        
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         rb.mass = 1;
