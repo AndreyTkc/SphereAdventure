@@ -4,9 +4,12 @@ using UnityEngine;
 public class PlayerCollision : MonoBehaviour
 {
     [SerializeField] private GameObject explosionPrefab;
+    [SerializeField] private Animator animator;
     private Rigidbody _rb;
     private MeshRenderer _meshRenderer;
+    [SerializeField] private PlayerHealth playerHealth;
     public static bool IsEnabled = false;
+    public static bool IsEnabledCameraMove = false;
 
     private void Awake()
     {
@@ -22,9 +25,10 @@ public class PlayerCollision : MonoBehaviour
             _rb.drag = 1.5f;
             _rb.angularDrag = 1.5f;
             IsEnabled = true;
+            IsEnabledCameraMove = true;
         }
         
-        else if (collision.collider.CompareTag("Enemy") && gameObject)
+        else if (collision.collider.CompareTag("Enemy") && gameObject && IsEnabled)
         {
             GameObject fractured = Instantiate(explosionPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.rotation);
             
@@ -33,6 +37,9 @@ public class PlayerCollision : MonoBehaviour
                 Vector3 force = (rb.transform.position - transform.position).normalized;
                 rb.AddForce(force);
             }
+
+            playerHealth.HealthUpdate();
+            
             StartCoroutine(Respawn());
         }
     }
@@ -41,14 +48,13 @@ public class PlayerCollision : MonoBehaviour
     {
         _meshRenderer.enabled = false;
         IsEnabled = false;
+        IsEnabledCameraMove = false;
+        _rb.constraints = RigidbodyConstraints.FreezeAll;
         yield return new WaitForSeconds(2);
-        _rb.velocity = Vector3.zero;
-        _rb.angularVelocity = Vector3.zero;
-        _rb.mass = 1;
-        _rb.drag = 0;
-        _rb.angularDrag = 0;
-        transform.position = new Vector3(-7.75f, 14, -7.80000019f);
-        _meshRenderer.enabled = true;
+        if (RespawnPlayer.IsAlive)
+        {
+            animator.SetTrigger("Play");
+        }
+        IsEnabledCameraMove = true;
     }
-    
 }
