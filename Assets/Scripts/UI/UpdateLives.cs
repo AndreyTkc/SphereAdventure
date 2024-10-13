@@ -17,8 +17,6 @@ public class UpdateLives : MonoBehaviour
 
     public void UpdatePlayerLives(int lives)
     {
-        //_text.text = "Lives: " + lives;
-        
         for (int i = 0; i < livesIcons.Length; i++)
         {
             if (i < lives)
