@@ -5,8 +5,8 @@ using UnityEngine;
 public class SpawnPlayer : MonoBehaviour
 {
     [SerializeField] private Rigidbody rb;
-
-    public void Spawn()
+    
+    public void Start()
     {
         rb.useGravity = true;
         Debug.Log("Player has spawned!");

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -8,8 +9,10 @@ public class PlayerCollision : MonoBehaviour
     private Rigidbody _rb;
     private MeshRenderer _meshRenderer;
     [SerializeField] private PlayerHealth playerHealth;
+    [SerializeField] private PlayerAtFinish playerAtFinish;
     public static bool IsEnabled = false;
     public static bool IsEnabledCameraMove = false;
+    private static readonly int Play = Animator.StringToHash("Play");
 
     private void Awake()
     {
@@ -42,6 +45,20 @@ public class PlayerCollision : MonoBehaviour
             
             StartCoroutine(Respawn());
         }
+        else if (collision.collider.name == "FinishCylinder")
+        {
+            _rb.useGravity = false;
+            playerAtFinish.isPulling = false;
+            Debug.Log("Player has stopped being pulled upwards!");
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<Collider>().name == "FinishTrigger" && gameObject && IsEnabled)
+        {
+            playerAtFinish.FreezePlayer();  
+        }
     }
 
     private IEnumerator Respawn()
@@ -53,7 +70,7 @@ public class PlayerCollision : MonoBehaviour
         yield return new WaitForSeconds(2);
         if (RespawnPlayer.IsAlive)
         {
-            animator.SetTrigger("Play");
+            animator.SetTrigger(Play);
         }
         IsEnabledCameraMove = true;
     }

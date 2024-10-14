@@ -16,12 +16,12 @@ public class CameraMove : MonoBehaviour
         fixedRotation = transform.rotation.eulerAngles;        
     }
     
-    void Start()
+    private void Start()
     {
         offset = transform.position - player.transform.position;
     }
 
-    void LateUpdate()
+    private void LateUpdate()
     {
         if (!player || !PlayerCollision.IsEnabledCameraMove) return;
         

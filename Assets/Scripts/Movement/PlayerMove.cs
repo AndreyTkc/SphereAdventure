@@ -16,6 +16,7 @@ public class PlayerMove : MonoBehaviour
     private void FixedUpdate()
     {
         if (!PlayerCollision.IsEnabled) return;
+        
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
