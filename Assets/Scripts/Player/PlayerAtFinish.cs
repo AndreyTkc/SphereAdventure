@@ -24,18 +24,18 @@ public class PlayerAtFinish : MonoBehaviour
     public void FreezePlayer()
     {
         wall.SetActive(true);
-        PlayerCollision.IsEnabledCameraMove = false;
+        //PlayerCollision.IsEnabledCameraMove = false;
         StartCoroutine(Cutscene());
-        isPulling = true;
     }
 
     private IEnumerator Cutscene()
     {
         yield return new WaitForSeconds(1.5f);
-        Debug.Log(dollyTrack.m_Waypoints[0].position);
-        dollyTrack.m_Waypoints[0].position = camera.transform.position;
-        Debug.Log(dollyTrack.m_Waypoints[0].position);
-        Debug.Log(camera.transform.position);
+        isPulling = true;
+        PlayerCollision.IsEnabledCameraMove = false;
+        PlayerCollision.IsEnabled = false;
+        Vector3 localPosition = dollyTrack.transform.InverseTransformPoint(camera.transform.position);
+        dollyTrack.m_Waypoints[0].position = localPosition;
         finishAnimation.SetActive(true);
         animator.SetTrigger(Finish);
     }
