@@ -5,8 +5,6 @@ public class CameraMove : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private Vector3 offset;
     [SerializeField] private Vector3 fixedRotation;
-    [SerializeField] private float speedH = 2.0f;
-    [SerializeField] private float speedV = 2.0f;
 
     private void Awake()
     {
