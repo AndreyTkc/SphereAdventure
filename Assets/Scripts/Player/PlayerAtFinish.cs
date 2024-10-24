@@ -7,10 +7,12 @@ using UnityEngine;
 public class PlayerAtFinish : MonoBehaviour
 {
     private static readonly int Finish = Animator.StringToHash("Finish");
+    private static readonly int PlayFinish = Animator.StringToHash("PlayFinish");
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject wall;
     [SerializeField] private GameObject finishAnimation;
-    [SerializeField] private Animator animator;
+    [SerializeField] private Animator cameraAnimator;
+    [SerializeField] private Animator finishAnimator;
     [SerializeField] private new Camera camera;
     [SerializeField] private CinemachineSmoothPath dollyTrack;
     private Rigidbody _rb;
@@ -37,7 +39,9 @@ public class PlayerAtFinish : MonoBehaviour
         Vector3 localPosition = dollyTrack.transform.InverseTransformPoint(camera.transform.position);
         dollyTrack.m_Waypoints[0].position = localPosition;
         finishAnimation.SetActive(true);
-        animator.SetTrigger(Finish);
+        cameraAnimator.SetTrigger(Finish);
+        yield return new WaitForSeconds(1.5f);
+        finishAnimator.SetTrigger(PlayFinish);
     }
 
     private void FixedUpdate()

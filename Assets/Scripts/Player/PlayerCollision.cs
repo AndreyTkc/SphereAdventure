@@ -12,7 +12,7 @@ public class PlayerCollision : MonoBehaviour
     [SerializeField] private PlayerAtFinish playerAtFinish;
     public static bool IsEnabled = false;
     public static bool IsEnabledCameraMove = false;
-    private static readonly int Play = Animator.StringToHash("Play");
+    private static readonly int Play = Animator.StringToHash("PlayRespawn");
 
     private void Awake()
     {
