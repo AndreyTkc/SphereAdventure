@@ -10,6 +10,7 @@ public class PlayerCollision : MonoBehaviour
     private MeshRenderer _meshRenderer;
     [SerializeField] private PlayerHealth playerHealth;
     [SerializeField] private PlayerAtFinish playerAtFinish;
+    [SerializeField] private ActivateButton activateButton;
     public static bool IsEnabled = false;
     public static bool IsEnabledCameraMove = false;
     private static readonly int Play = Animator.StringToHash("PlayRespawn");
@@ -45,11 +46,17 @@ public class PlayerCollision : MonoBehaviour
             
             StartCoroutine(Respawn());
         }
-        else if (collision.collider.name == "FinishCylinder")
+        else if (collision.collider.name == "FinishCylinder" && gameObject && IsEnabled)
         {
             _rb.useGravity = false;
             playerAtFinish.isPulling = false;
             Debug.Log("Player has stopped being pulled upwards!");
+        }
+        
+        else if (collision.collider.CompareTag("Button") && gameObject && IsEnabled)
+        {
+            Debug.Log(collision.gameObject.name);
+            activateButton.PushButton(collision.gameObject.name);
         }
     }
 
