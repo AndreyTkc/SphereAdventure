@@ -5,24 +5,40 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     private static readonly int GameOverTrigger = Animator.StringToHash("GameOverTrigger");
-    private int _health = 5;
+    public int health = 5;
+    public int healthPointsInInventory = 0;
 
     [SerializeField] private UpdateLives updateLives;
     [SerializeField] private Animator animator;
 
-    public void HealthUpdate()
+    private void HealthUpdate()
     {
-        _health--;
+        updateLives.UpdatePlayerLives(health);
         
-        Debug.Log(_health);
-        
-        updateLives.UpdatePlayerLives(_health);
-        
-        if (_health <= 0)
+        if (health <= 0)
         {
-            Debug.Log("Game Over!");
             animator.SetTrigger(GameOverTrigger);
             RespawnPlayer.IsAlive = false;
         }
+    }
+    
+    public void AddHealth()
+    {
+        if (health >= 5)
+        {
+            healthPointsInInventory++;
+            updateLives.ChangeLivesInInventory(healthPointsInInventory);
+        }
+        else
+        {
+            health++;
+            HealthUpdate();
+        }
+    }
+
+    public void RemoveHealth()
+    {
+        health--;
+        HealthUpdate();
     }
 }

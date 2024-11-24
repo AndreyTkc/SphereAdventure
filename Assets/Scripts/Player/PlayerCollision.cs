@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour
@@ -11,6 +12,8 @@ public class PlayerCollision : MonoBehaviour
     [SerializeField] private PlayerHealth playerHealth;
     [SerializeField] private PlayerAtFinish playerAtFinish;
     [SerializeField] private ActivateButton activateButton;
+    [SerializeField] private AddHealth addHealth;
+    [SerializeField] private CameraMove cameraMove;
     public static bool IsEnabled = false;
     public static bool IsEnabledCameraMove = false;
     private static readonly int Play = Animator.StringToHash("PlayRespawn");
@@ -42,7 +45,7 @@ public class PlayerCollision : MonoBehaviour
                 rb.AddForce(force);
             }
 
-            playerHealth.HealthUpdate();
+            playerHealth.RemoveHealth();
             
             StartCoroutine(Respawn());
         }
@@ -50,12 +53,10 @@ public class PlayerCollision : MonoBehaviour
         {
             _rb.useGravity = false;
             playerAtFinish.isPulling = false;
-            Debug.Log("Player has stopped being pulled upwards!");
         }
         
         else if (collision.collider.CompareTag("Button") && gameObject && IsEnabled)
         {
-            Debug.Log(collision.gameObject.name);
             activateButton.PushButton(collision.gameObject.name);
         }
     }
@@ -66,7 +67,30 @@ public class PlayerCollision : MonoBehaviour
         {
             playerAtFinish.FreezePlayer();  
         }
+        else if (other.GetComponent<Collider>().CompareTag("Heal") && gameObject && IsEnabled)
+        {
+            addHealth.AddHealthToPlayer();
+            other.gameObject.SetActive(false);
+            var pointLight = other.transform.parent.GetComponentInChildren<Light>();
+            if (pointLight != null && pointLight.type == LightType.Point)
+            {
+                pointLight.enabled = false;
+            }
+        }
+        else if (other.GetComponent<Collider>().CompareTag("Trigger") && gameObject && IsEnabled)
+        {
+            cameraMove.LowerCamera();
+        }
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.GetComponent<Collider>().CompareTag("Trigger") && gameObject && IsEnabled)
+        {
+            cameraMove.RaiseCamera();
+        }
+    }
+
 
     private IEnumerator Respawn()
     {

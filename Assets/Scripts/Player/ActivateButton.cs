@@ -34,7 +34,7 @@ public class ActivateButton : MonoBehaviour
     private void AnimateButton(GameObject button, Material color, GameObject lockNumber)
     {
         button.transform.localScale = new Vector3(1.37051177f, 0.021364799f, 1.41144562f);
-        color.SetColor("_EmissionColor", new Color(0f, 0f, 0f));
+        button.GetComponent<Renderer>().material = color;
         lockNumber.SetActive(false);
     }
 }
