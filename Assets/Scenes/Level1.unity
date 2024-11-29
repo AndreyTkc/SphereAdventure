@@ -2059,6 +2059,7 @@ MonoBehaviour:
   go: {fileID: 1150984883}
   rb: {fileID: 1150984886}
   mr: {fileID: 1150984888}
+  cameraMove: {fileID: 0}
 --- !u!1 &254246488
 GameObject:
   m_ObjectHideFlags: 0
@@ -3462,7 +3463,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &504826714
 Transform:
   m_ObjectHideFlags: 0
@@ -5449,7 +5450,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &740127882
 Transform:
   m_ObjectHideFlags: 0
@@ -5559,7 +5560,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 740127886}
           m_TargetAssemblyTypeName: SpawnPlayer, Assembly-CSharp
-          m_MethodName: Spawn
+          m_MethodName: SpawnAfterCutscene
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -6424,8 +6425,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: -7.75, y: 7, z: -7.8}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -0.06, y: 17.48, z: 0.16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6446,6 +6447,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1150984883}
   offset: {x: 0, y: 0, z: 0}
+  specialOffset: {x: 0, y: 6.500028, z: 0}
   fixedRotation: {x: 90, y: 0, z: 0}
 --- !u!114 &963194231
 MonoBehaviour:
@@ -7424,6 +7426,9 @@ MonoBehaviour:
   animator: {fileID: 242683608}
   playerHealth: {fileID: 1150984891}
   playerAtFinish: {fileID: 657124127}
+  activateButton: {fileID: 0}
+  addHealth: {fileID: 0}
+  cameraMove: {fileID: 0}
 --- !u!114 &1150984891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7436,6 +7441,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ff3bf835e445be4c89150956140ad4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 5
+  healthPointsInInventory: 0
   updateLives: {fileID: 1362348187}
   animator: {fileID: 792600145}
 --- !u!114 &1150984892
@@ -8580,7 +8587,11 @@ MonoBehaviour:
   - {fileID: 481686833}
   - {fileID: 1554424136}
   - {fileID: 413472467}
+  inventoryIcons: []
+  extraHpIcon: []
   emptyLivesIcon: {fileID: 2800000, guid: 783814fb935ff8f41af34d39e3d91a48, type: 3}
+  crystalIcon: {fileID: 2800000, guid: 28964520fce252a4b873dd0a57c3fe25, type: 3}
+  playerHealth: {fileID: 1150984891}
 --- !u!1 &1365310134
 GameObject:
   m_ObjectHideFlags: 0

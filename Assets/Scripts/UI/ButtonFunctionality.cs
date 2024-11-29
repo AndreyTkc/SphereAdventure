@@ -11,6 +11,8 @@ public class ButtonFunctionality : MonoBehaviour
     [SerializeField] private GameObject pauseIcon;
     [SerializeField] private Button resumeButton;
     [SerializeField] private EventSystem eventSystem;
+    [SerializeField] private GameObject startMenu;
+    [SerializeField] private GameObject levelChooseMenu;
     
     private void Update()
     {
@@ -33,12 +35,19 @@ public class ButtonFunctionality : MonoBehaviour
         HideBarAndPauseIcon();
         pauseMenu.SetActive(true);
     }
-    
+
     public void PlayGame()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("FirstLevel");
+        startMenu.SetActive(false);
+        levelChooseMenu.SetActive(true);
     }
 
+    public void BackFromLevelMenuToMainMenu()
+    {
+        startMenu.SetActive(true);
+        levelChooseMenu.SetActive(false);
+    }
+    
     public void StartMenu()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("StartMenu");

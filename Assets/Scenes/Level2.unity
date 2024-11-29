@@ -13582,7 +13582,7 @@ MonoBehaviour:
     roll: 0
   - position: {x: -28.994125, y: 31.974098, z: -27.075632}
     roll: 0
-  - position: {x: -33.81773, y: 73.17474, z: -41.304916}
+  - position: {x: -33.81773, y: 73.17474, z: -39.675285}
     roll: 0
 --- !u!4 &991800834
 Transform:
@@ -16438,6 +16438,8 @@ MonoBehaviour:
   pauseIcon: {fileID: 1155649330}
   resumeButton: {fileID: 62348758}
   eventSystem: {fileID: 2006791080}
+  startMenu: {fileID: 0}
+  levelChooseMenu: {fileID: 0}
 --- !u!1 &1213514651
 GameObject:
   m_ObjectHideFlags: 0
