@@ -2059,7 +2059,7 @@ MonoBehaviour:
   go: {fileID: 1150984883}
   rb: {fileID: 1150984886}
   mr: {fileID: 1150984888}
-  cameraMove: {fileID: 0}
+  cameraMove: {fileID: 963194230}
 --- !u!1 &254246488
 GameObject:
   m_ObjectHideFlags: 0
@@ -6426,7 +6426,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.06, y: 17.48, z: 0.16}
+  m_LocalPosition: {x: -7.75, y: 7, z: -7.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7428,7 +7428,7 @@ MonoBehaviour:
   playerAtFinish: {fileID: 657124127}
   activateButton: {fileID: 0}
   addHealth: {fileID: 0}
-  cameraMove: {fileID: 0}
+  cameraMove: {fileID: 963194230}
 --- !u!114 &1150984891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7755,6 +7755,8 @@ MonoBehaviour:
   pauseIcon: {fileID: 1155649330}
   resumeButton: {fileID: 62348758}
   eventSystem: {fileID: 2006791080}
+  startMenu: {fileID: 0}
+  levelChooseMenu: {fileID: 0}
 --- !u!1 &1226123306
 GameObject:
   m_ObjectHideFlags: 0

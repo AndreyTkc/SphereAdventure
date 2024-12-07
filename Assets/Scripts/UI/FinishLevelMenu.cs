@@ -6,7 +6,16 @@ public class FinishLevelMenu : MonoBehaviour
 {
     [SerializeField] private Animator animator;
     private static readonly int PlayFinish = Animator.StringToHash("PlayFinish");
-    private GameDataManager.GameData _data = new GameDataManager.GameData();
+    private GameDataManager.GameData _data;
+    
+    private void Awake()
+    {
+        _data = GameDataManager.Load();
+        if (_data == null)
+        {
+            _data = new GameDataManager.GameData();
+        }
+    }
     
     public void FinishFadeEffect()
     {
@@ -14,9 +23,7 @@ public class FinishLevelMenu : MonoBehaviour
     }
     public void FinishMenu()
     {
-        Debug.Log(_data.completedLevels);
         _data.completedLevels += 1;
-        Debug.Log(_data.completedLevels);
         GameDataManager.Save(_data);
         UnityEngine.SceneManagement.SceneManager.LoadScene("StartMenu");
     }

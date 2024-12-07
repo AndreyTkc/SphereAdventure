@@ -18,8 +18,7 @@ public class LevelChooseMenuFunctionality : MonoBehaviour
     private void Awake()
     {
         GameDataManager.GameData loadedData = GameDataManager.Load();
-        _data = GameDataManager.Load();
-        Debug.Log(_data.completedLevels);
+        _data = loadedData;
         
         _data.completedLevels = loadedData.completedLevels;
         
@@ -35,6 +34,7 @@ public class LevelChooseMenuFunctionality : MonoBehaviour
                 levelIcons[k].GetComponent<Image>().color = new Color(0.0f, 0.0f, 0.0f, 0.55f);
                 iconsTextLabels[k].GetComponent<TextMeshProUGUI>().colorGradient = new VertexGradient(Color.white);
                 iconsTextLabels[k].GetComponent<TextMeshProUGUI>().color = new Color(0.0f, 1.0f, 0.0f, 1.0f);
+                levelButtons[k].GetComponent<Button>().interactable = false;
             }
         }
     }
@@ -42,8 +42,7 @@ public class LevelChooseMenuFunctionality : MonoBehaviour
     public void PressLevelButton(GameObject button)
     {
         string parentName = button.transform.parent.name;
-        char lastChar = parentName[parentName.Length - 1];
-        Debug.Log("Last character of parent's name: " + lastChar);
+        char lastChar = parentName[^1];
         string levelName = "Level" + lastChar;
         UnityEngine.SceneManagement.SceneManager.LoadScene(levelName);
     }
