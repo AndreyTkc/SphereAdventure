@@ -19,7 +19,7 @@ public class LevelChooseMenuFunctionality : MonoBehaviour
     {
         GameDataManager.GameData loadedData = GameDataManager.Load();
         _data = loadedData;
-        
+
         _data.completedLevels = loadedData.completedLevels;
         
         for (int i = 0; i < loadedData.completedLevels; i++)
@@ -44,6 +44,7 @@ public class LevelChooseMenuFunctionality : MonoBehaviour
         string parentName = button.transform.parent.name;
         char lastChar = parentName[^1];
         string levelName = "Level" + lastChar;
+        Console.WriteLine(levelName);
         UnityEngine.SceneManagement.SceneManager.LoadScene(levelName);
     }
 }
